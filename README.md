@@ -10,6 +10,11 @@ This game uses JavaScript, CSS, and HTML as it's core and a little PHP to fetch 
  * **On Screen Keyboard** - Players can use the the on screen keyboard for the game. This feature was built so not only desktop users can enjoy the game, _but also for mobile users_.
  * **Physical Keyboad** - Players can also use their own peripheral devices in playing this game. It work just like the onscreen keyboard and it's rule. _player cannot guess the same letter and only does not accepts non-letter character as player input_
 
+**Game mode**
+
+The player can choose the level of difficulty of the game, Easy Normal and Hard. 
+
+---
 **Reference**
 
 [Phrase Generator](https://www.thegamegal.com/word-generator/ "The Game Gal") 
