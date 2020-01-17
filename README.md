@@ -1,9 +1,10 @@
 # **OOP Phrase Hunter Game**
-> This is a simple game that makes the player guess the correct letters in the phrase. The game will end once the player successfully guess all the letters in the phrase or loses all five hearts.
+This is a simple game that makes the player guess the correct letters in the phrase. The game will end once the player successfully guess all the letters in the phrase or loses all five hearts.
 
 ## **Documentation**
 **Structure**
->This game uses JavaScript, CSS, and HTML as it's core and a little PHP to fetch the JSON data on the third party website (_see reference for more details_) used in making this game.
+
+This game uses JavaScript, CSS, and HTML as it's core and a little PHP to fetch the JSON data on the third party website (_see reference for more details_) used in making this game.
 
 **Controls**
  * **On Screen Keyboard** - Players can use the the on screen keyboard for the game. This feature was built so not only desktop users can enjoy the game, _but also for mobile users_.
@@ -16,4 +17,4 @@ this game uses a third party website for generating phrases.
 
 **Author**
 
-this game was programmed by [Raven Aquino](https://github.com/synra-dev/)
+This game was programmed by [Raven Aquino](https://github.com/synra-dev/)
