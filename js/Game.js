@@ -69,6 +69,7 @@ class Game {
         } else {
             msg.textContent = "Congratulations! you win <3";
         }
+        clearInterval(intvl);
         this.lastPhrase = this.activePhrase;
         this.inGame = false;
     }
