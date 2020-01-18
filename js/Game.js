@@ -4,6 +4,8 @@ class Game {
         this.missed = null;
         this.phrases = [];
         this.activePhrase = null;
+        // prevents from repeating phrase
+        this.lastPhrase = null;
         this.inGame = false;
         this.level = null;
     }
@@ -67,7 +69,7 @@ class Game {
         } else {
             msg.textContent = "Congratulations! you win <3";
         }
-
+        this.lastPhrase = this.activePhrase;
         this.inGame = false;
     }
 
@@ -104,7 +106,9 @@ class Game {
 
     // selects a random phrase on the list of phrase. return a phrase as output 
     getRandomPhrase() {
-         const rand = Math.floor(Math.random() * this.phrases.length)
+         let rand;
+         while(this.phrases[rand] === this.lastPhrase || rand == undefined) rand = Math.floor(Math.random() * this.phrases.length);
+
          return this.phrases[rand];
     }
 }
