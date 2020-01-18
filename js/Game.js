@@ -5,6 +5,7 @@ class Game {
         this.phrases = [];
         this.activePhrase = null;
         this.inGame = false;
+        this.level = null;
     }
 
     // Sets the basic configuration for the game each time it's called
@@ -20,7 +21,8 @@ class Game {
         
         this.missed = 0;
         this.inGame = true;
-        this.phrases = this.createPhrase(mode);
+        this.level = mode;
+        this.phrases = this.createPhrase();
         this.activePhrase = new Phrase(this.getRandomPhrase());
         document.getElementById("overlay").style.display = "none";
         document.getElementById("mode").style.display = "none";
@@ -56,11 +58,11 @@ class Game {
     }
 
     // stops game if player matched all letters in phrase or loses 5 hearts
-    gameOver() {
+    gameOver(timeout = false) {
         const msg = document.getElementById("game-over-message")
         document.getElementById("overlay").style.display = "flex";
         document.getElementById("game-set").style.display = "";
-        if(this.missed === 5) {
+        if(this.missed === 5 || timeout) {
             msg.textContent = "Game Over! you lose...";
         } else {
             msg.textContent = "Congratulations! you win <3";
@@ -73,25 +75,29 @@ class Game {
      * filter list depending on the game mode selected
      * returns the phrase list
     */
-    createPhrase(mode) {
+    createPhrase() {
         const xhr = new XMLHttpRequest();
         let pList;
         xhr.onreadystatechange = () => {  
             if(xhr.readyState !== 4) return;       
             const phrases = JSON.parse(xhr.responseText).words;
-            pList = phrases.filter(phrase => /^[a-z0-9\s\.]+$/i.test(phrase));
+            pList = phrases.filter(phrase => {
+                if(!/^[a-z0-9\s\.]+$/i.test(phrase)) return;
+
+                const letters = phrase.replace(/\s/, "").split("");
+                if(this.level === "Hard") {
+                    return letters.length > 22;
+                } else if(this.level === "Normal") {
+                    return letters.length > 12 && letters.length <= 22;
+                } else {
+                    return letters.length <= 12;
+                }
+
+            });
         }
 
         xhr.open("GET", "api/", false);
         xhr.send();
-
-        if(mode == "Hard") {
-            pList = pList.filter(phrase => phrase.split(" ").length > 5);
-        } else if(mode == "Normal") {
-            pList = pList.filter(phrase => phrase.split(" ").length > 3 && phrase.split(" ").length <= 5);
-        } else {
-            pList = pList.filter(phrase => phrase.split(" ").length <= 3);
-        }
 
         return pList;
     }

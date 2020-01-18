@@ -4,6 +4,27 @@
 // create instance Game class
 const game = new Game();
 
+// declare variables needed for game timer
+let endTimer = 0;
+let counter = 0;
+let intvl;
+
+
+// Handler for set interval. this will be the game timer
+function timer() {
+    if(endTimer === counter) {
+        clearInterval(intvl);
+        game.gameOver(true);
+    }
+
+    const time = endTimer - counter;
+    const min = Math.floor(time / 60).toString().padStart(2, "0");
+    const sec = (time % 60).toString().padStart(2, "0");
+
+    document.getElementById("timer").textContent = `${min}:${sec}`;
+    counter++
+}
+
 // setup callback funuction for physical keyboard
 function keyboard(e) {
     if(!/(^[a-z]$)/i.test(e.key) || !game.inGame) return;
@@ -26,6 +47,10 @@ document.querySelectorAll("button").forEach(button => {
 
         if(this.parentNode.id == "mode") {
             game.startGame(this.textContent);
+            endTimer = game.level == "Hard" ? (5 * 60) : (10 * 60);
+            counter = 0;
+            timer();
+            intvl = setInterval(timer, 1000);
             return;
         }
 
