@@ -41,11 +41,11 @@ document.querySelectorAll("button").forEach(button => {
     button.addEventListener('click', function() {
         if(this.id === "btn__reset") {
             document.getElementById("game-set").style.display = "none";
-            document.getElementById("mode").style.display = "";
+            document.getElementById("game-mode").style.display = "block";
             return;
         }
 
-        if(this.parentNode.id == "mode") {
+        if(this.parentNode.id == "game-mode") {
             game.startGame(this.textContent);
             endTimer = game.level == "Hard" ? (5 * 60) : (10 * 60);
             counter = 0;

@@ -175,6 +175,10 @@ button {
   border-radius: 5px;
 }
 
+#game-mode {
+  display: none;
+}
+
 .title {
   color: #FFF;
 }

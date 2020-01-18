@@ -27,7 +27,7 @@ class Game {
         this.phrases = this.createPhrase();
         this.activePhrase = new Phrase(this.getRandomPhrase());
         document.getElementById("overlay").style.display = "none";
-        document.getElementById("mode").style.display = "none";
+        document.getElementById("game-mode").style.display = "none";
         document.getElementById("kbox").checked = '';
         document.removeEventListener("keyup", keyboard)
         this.activePhrase.addPhraseToDisplay();
