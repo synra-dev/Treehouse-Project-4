@@ -25,6 +25,7 @@ class Game {
         document.getElementById("overlay").style.display = "none";
         document.getElementById("mode").style.display = "none";
         document.getElementById("kbox").checked = '';
+        document.removeEventListener("keyup", keyboard)
         this.activePhrase.addPhraseToDisplay();
     }
 
