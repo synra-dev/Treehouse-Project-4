@@ -84,6 +84,9 @@ class Game {
          ******************************************************************
          *  Uses Ajax to send request to the API for the list of phrases  *
          *  uncomment this line if yuo want to use thi feature            *
+         *                                                                *
+         *  WARNING: Enabling this feature would require the user         *
+         *           to run the program on a web server                   *
          ******************************************************************
             const xhr = new XMLHttpRequest();
             let pList;
