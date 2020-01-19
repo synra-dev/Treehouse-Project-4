@@ -5,10 +5,9 @@
 const game = new Game();
 
 // declare variables needed for game timer
-let endTimer = 0;
-let counter = 0;
-let intvl;
-
+let endTimer = 0,
+    counter = 0,
+    intvl;
 
 // Handler for set interval. this will be the game timer
 function timer() {

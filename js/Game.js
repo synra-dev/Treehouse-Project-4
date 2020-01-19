@@ -16,11 +16,11 @@ class Game {
             key.removeAttribute("disabled");
             key.className = "key";
         });
-            
-        Array.from(document.querySelectorAll("img[src*='Heart.png']")).forEach(heart => {
+
+        Array.from(document.querySelectorAll("img[src$='Heart.png']")).forEach(heart => {
             heart.src = "images/liveHeart.png";
         });
-        
+
         this.missed = 0;
         this.inGame = true;
         this.level = mode;
@@ -79,37 +79,59 @@ class Game {
      * returns the phrase list
     */
     createPhrase() {
-        const xhr = new XMLHttpRequest();
-        let pList;
-        xhr.onreadystatechange = () => {  
-            if(xhr.readyState !== 4) return;       
-            const phrases = JSON.parse(xhr.responseText).words;
-            pList = phrases.filter(phrase => {
-                if(!/^[a-z0-9\s\.]+$/i.test(phrase)) return;
+        /*
 
-                const letters = phrase.replace(/\s/, "").split("");
-                if(this.level === "Hard") {
-                    return letters.length > 22;
-                } else if(this.level === "Normal") {
-                    return letters.length > 12 && letters.length <= 22;
-                } else {
-                    return letters.length <= 12;
-                }
+         ******************************************************************
+         *  Uses Ajax to send request to the API for the list of phrases  *
+         *  uncomment this line if yuo want to use thi feature            *
+         ******************************************************************
+            const xhr = new XMLHttpRequest();
+            let pList;
+            xhr.onreadystatechange = () => {  
+                if(xhr.readyState !== 4) return;       
+                const phrases = JSON.parse(xhr.responseText).words;
+                pList = phrases.filter(phrase => {
+                    if(!/^[a-z0-9\s\.]+$/i.test(phrase)) return;
 
-            });
-        }
+                    const letters = phrase.replace(/\s/, "").split("");
+                    if(this.level === "Hard") {
+                        return letters.length > 22;
+                    } else if(this.level === "Normal") {
+                        return letters.length > 12 && letters.length <= 22;
+                    } else {
+                        return letters.length <= 12;
+                    }
 
-        xhr.open("GET", "api/", false);
-        xhr.send();
+                });
+            }
 
-        return pList;
+            xhr.open("GET", "api/", false);
+            xhr.send();
+
+            return pList; */
+
+        /*
+         * returns phrase list depending on the choosen game level
+         * comment the code below if you're planning to use the program abov
+        */
+        return list.filter(phrase => {
+            const letters = phrase.split("");
+            
+            if(this.level === "Hard") {
+                return letters.length > 22;
+            } else if(this.level === "Normal") {
+                return letters.length > 12 && letters.length <= 22;
+            } else {
+                return letters.length <= 12;
+            }
+        });
     }
 
     // selects a random phrase on the list of phrase. return a phrase as output 
     getRandomPhrase() {
-         let rand;
-         while(this.phrases[rand] === this.lastPhrase || rand == undefined) rand = Math.floor(Math.random() * this.phrases.length);
+        let rand;
+        while(this.phrases[rand] === this.lastPhrase || rand == undefined) rand = Math.floor(Math.random() * this.phrases.length);
 
-         return this.phrases[rand];
+        return this.phrases[rand];
     }
 }
