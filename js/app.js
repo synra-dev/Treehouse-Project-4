@@ -34,7 +34,7 @@ function keyboard(e) {
     const key = e.key.toLowerCase();
 
     const button = Array.from(document.getElementsByClassName("key")).find(button => button.textContent == key);
-    if(button && !button.disabled) game.handInteraction(button);
+    if(button && !button.disabled) game.handleInteraction(button);
 }
 
 /* add event listener for all buttons.
@@ -58,8 +58,7 @@ document.querySelectorAll("button").forEach(button => {
             return;
         }
 
-        console.log(this);
-        game.handInteraction(this);
+        if(this.className == "key") game.handleInteraction(this);
     });
 });
 

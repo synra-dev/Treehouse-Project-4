@@ -30,7 +30,7 @@ class Game {
     }
 
     // checks if user input matches a letter in the phrase
-    handInteraction(input) {
+    handleInteraction(input) {
         input.disabled = true;
         if(this.activePhrase.checkLetter(input.textContent)) {
             input.classList.add("chosen");
