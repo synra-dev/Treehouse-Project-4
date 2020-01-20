@@ -1,8 +1,12 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * app.js */
-// create instance Game class
-const game = new Game();
+
+// declare variable to store the game
+let game;
+
+// declare the variable that will store the phrase in the last game session
+let lastPhrase;
 
 // declare variables needed for game timer
 let endTimer = 0,
@@ -45,7 +49,8 @@ document.querySelectorAll("button").forEach(button => {
         }
 
         if(this.parentNode.id == "game-mode") {
-            game.startGame(this.textContent);
+            game = new Game(this.textContent, lastPhrase);
+            game.startGame();
             endTimer = game.level == "Hard" ? (5 * 60) : (10 * 60);
             counter = 0;
             timer();
@@ -53,6 +58,7 @@ document.querySelectorAll("button").forEach(button => {
             return;
         }
 
+        console.log(this);
         game.handInteraction(this);
     });
 });

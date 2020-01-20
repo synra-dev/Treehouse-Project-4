@@ -1,17 +1,16 @@
 class Game {
     // set Game properties
-    constructor() {
-        this.missed = null;
-        this.phrases = [];
+    constructor(level, lastPhrase) {
+        this.missed = 0;
+        this.level = level;
+        this.phrases = this.createPhrase();
         this.activePhrase = null;
-        // prevents from repeating phrase
-        this.lastPhrase = null;
+        this.lastPhrase = lastPhrase;
         this.inGame = false;
-        this.level = null;
     }
 
     // Sets the basic configuration for the game each time it's called
-    startGame(mode) {
+    startGame() {
         Array.from(document.getElementsByClassName("key")).forEach(key => {
             key.removeAttribute("disabled");
             key.className = "key";
@@ -21,10 +20,7 @@ class Game {
             heart.src = "images/liveHeart.png";
         });
 
-        this.missed = 0;
         this.inGame = true;
-        this.level = mode;
-        this.phrases = this.createPhrase();
         this.activePhrase = new Phrase(this.getRandomPhrase());
         document.getElementById("overlay").style.display = "none";
         document.getElementById("game-mode").style.display = "none";
@@ -70,7 +66,7 @@ class Game {
             msg.textContent = "Congratulations! you win <3";
         }
         clearInterval(intvl);
-        this.lastPhrase = this.activePhrase;
+        lastPhrase = this.activePhrase;
         this.inGame = false;
     }
 
@@ -94,7 +90,7 @@ class Game {
                 if(xhr.readyState !== 4) return;       
                 const phrases = JSON.parse(xhr.responseText).words;
                 pList = phrases.filter(phrase => {
-                    if(!/^[a-z0-9\s\.]+$/i.test(phrase)) return;
+                    if(!/^[a-z\s]+$/i.test(phrase)) return;
 
                     const letters = phrase.replace(/\s/, "").split("");
                     if(this.level === "Hard") {
